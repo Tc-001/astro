@@ -143,6 +143,7 @@ export const renderSlot = async (result: any, slotted: string, fallback?: any) =
 };
 
 export const renderComponent = async (result: any, displayName: string, Component: unknown, _props: Record<string | number, any>, slots?: any) => {
+  console.log({ result });
   Component = await Component;
   // children = await renderGenerator(children);
   const { renderers } = result._metadata;
