@@ -80,7 +80,7 @@ class AstroBuilder {
           allPages.push(
             ssr({ astroConfig: this.config, filePath, logging, mode: 'production', origin, route, routeCache: this.routeCache, pathname, viteServer }).then((html) => ({
               html,
-              name: pathname.replace(/\/?$/, '/index.html').replace(/^\//, ''),
+              name: (filePath.toString().endsWith(".js") ? pathname : pathname.replace(/\/?$/, '/index.html')).replace(/^\//, ''),
             }))
           );
         }

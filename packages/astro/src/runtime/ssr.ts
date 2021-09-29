@@ -140,6 +140,8 @@ export async function ssr({ astroConfig, filePath, logging, mode, origin, pathna
     // important that this happens _after_ ssrLoadModule, otherwise `importedModules` would be empty
     const [renderers, importedModules] = await Promise.all([resolveRenderers(viteServer, astroConfig.renderers), resolveImportedModules(viteServer, fileURLToPath(filePath))]);
 
+    if(filePath.toString().endsWith(".js")) return mod.get().body
+
     // 2. handle dynamic routes
     let params: Params = {};
     let pageProps: Props = {};
