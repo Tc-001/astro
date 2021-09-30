@@ -13,5 +13,8 @@
   },
   "snowpack": {
     "workspaceRoot": "../.."
+  },
+  "dependencies": {
+    "rollup-plugin-copy": "^3.4.0"
   }
 }

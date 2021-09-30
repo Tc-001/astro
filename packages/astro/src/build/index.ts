@@ -2,6 +2,8 @@ import type { AstroConfig, ComponentInstance, GetStaticPathsResult, ManifestData
 import type { LogOptions } from '../logger';
 
 import { rollupPluginHTML } from '@web/rollup-plugin-html';
+
+
 import fs from 'fs';
 import { bold, cyan, green, dim } from 'kleur/colors';
 import { performance } from 'perf_hooks';
@@ -81,6 +83,7 @@ class AstroBuilder {
             ssr({ astroConfig: this.config, filePath, logging, mode: 'production', origin, route, routeCache: this.routeCache, pathname, viteServer }).then((html) => ({
               html,
               name: (filePath.toString().endsWith(".js") ? pathname : pathname.replace(/\/?$/, '/index.html')).replace(/^\//, ''),
+              isEndpoint: filePath.toString().endsWith(".js"),
             }))
           );
         }
@@ -131,6 +134,7 @@ class AstroBuilder {
         rollupPluginHTML({
           input,
           extractAssets: false,
+          transformHtml: (html,args) => JSON.stringify(args)
         }),
         ...(viteConfig.plugins || []),
       ],
